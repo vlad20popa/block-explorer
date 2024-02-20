@@ -1,6 +1,7 @@
 import NavBar from "@/layouts/NavBar";
 import ExplorerHeader from "@/layouts/ExplorerHeader";
 import Blocks from "@/components/explorer/Blocks";
+import BlockExplorerLayout from "@/layouts/BlockExplorerLayout";
 
 export default function Home() {
 
@@ -8,8 +9,7 @@ export default function Home() {
     <div className="flex">
       <NavBar/>
       <main className="flex flex-col w-full">
-        <ExplorerHeader/>
-        <Blocks></Blocks>
+        <BlockExplorerLayout />
       </main>
     </div>
   );

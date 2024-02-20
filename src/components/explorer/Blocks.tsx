@@ -1,12 +1,35 @@
 import Block from "@/components/explorer/Block";
+import { ApiCacheKeys } from "@/model/ApiConstants";
+import { getBlockNumbers, getLatestBlock } from "@/api/BlocksApi";
+import { useQuery } from "@tanstack/react-query";
+import BlocksSkeleton from "@/components/explorer/BlocksSkeleton";
 
 export default function Blocks() {
-  const blocks = Array.from({ length: 5 });
+  const { data: latestBlock, isLoading: isLatestBlockLoading } = useQuery({
+    queryKey: [ApiCacheKeys.LATEST_BLOCK],
+    queryFn: getLatestBlock,
+  });
+
+  const offset = latestBlock?.result;
+
+  const { data: blocks, isLoading: areBlocksLoading } = useQuery({
+    queryKey: [ApiCacheKeys.BLOCK_NUMBERS],
+    queryFn: () => getBlockNumbers(parseInt(offset || "0", 16), 10),
+    enabled: offset !== undefined,
+  });
+
+  const isFetching = isLatestBlockLoading || areBlocksLoading;
+
+  console.log(blocks);
+  if (isFetching) {
+    return <BlocksSkeleton />;
+  }
+
   return (
     <div className="flex flex-col pb-16">
       <div className="p-8 grid grid-cols-1 md:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 gap-4">
-        {blocks.map(() => (
-          <Block blockNumber={8243123} transactionsCount={87} age={12} />
+        {blocks?.map((block) => (
+          <Block block={block.result} isFetching={isFetching} />
         ))}
         <div></div>
       </div>
