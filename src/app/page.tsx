@@ -1,11 +1,16 @@
-import NavBar from "@/components/layout/NavBar";
+import NavBar from "@/layouts/NavBar";
+import ExplorerHeader from "@/layouts/ExplorerHeader";
+import Blocks from "@/components/explorer/Blocks";
 
 export default function Home() {
 
-  return (  
+  return (
     <div className="flex">
       <NavBar/>
-      <main className="flex min-h-screen items-center justify-between p-24"></main>
+      <main className="flex flex-col w-full">
+        <ExplorerHeader/>
+        <Blocks></Blocks>
+      </main>
     </div>
   );
 }
