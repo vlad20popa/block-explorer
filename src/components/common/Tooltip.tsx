@@ -4,7 +4,6 @@ type TooltipProps = {
     transaction: Transaction
 }
 export default function Tooltip({transaction}: TooltipProps) {
-    console.log(transaction.to);
 
     return (
         <div className="absolute z-10 flex flex-col w-80 scale-0 rounded bg-white p-2 text-xs text-gray-500 group-hover:scale-100" style={{

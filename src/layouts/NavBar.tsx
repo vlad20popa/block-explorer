@@ -13,7 +13,7 @@ export default function NavBar() {
     }
 
     return (
-        <nav className="flex flex-col min-h-screen bg-light-purple w-24">
+        <nav className="flex flex-col max-h-screen bg-light-purple w-24">
             <div className="flex flex-col justify-between h-full">
                 <div>
                     <Logo />

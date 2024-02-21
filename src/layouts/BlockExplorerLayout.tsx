@@ -8,7 +8,9 @@ export default function BlockExplorerLayout() {
     return (
         <>
             <ExplorerHeader/>
-            <Blocks/>
+            <div className="max-w-fit">
+                <Blocks/>
+            </div>
         </>
     );
 }

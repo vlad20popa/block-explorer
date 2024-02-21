@@ -1,11 +1,12 @@
 import Tooltip from "@/components/common/Tooltip";
 import { Block, Transaction } from "@/model/dto/Block";
+import {memo} from "react";
 
 type BlockProps = {
   block: Block;
   isFetching: boolean;
 };
-export default function Block({ block, isFetching }: BlockProps) {
+const Block = memo( function ({ block, isFetching }: BlockProps) {
   const squares = Array.from({ length: 25 });
   const blockAge = Math.floor(
     Date.now() / 1000 - parseInt(block.timestamp, 16),
@@ -34,7 +35,7 @@ export default function Block({ block, isFetching }: BlockProps) {
         {/*TODO extract in separate component*/}
         {block.transactions.slice(0, 100).map((transaction) => (
           <div
-            key={transaction?.nonce}
+            key={transaction?.hash}
             className="group relative flex justify-center overflow-visible"
           >
             <div
@@ -48,4 +49,6 @@ export default function Block({ block, isFetching }: BlockProps) {
       </div>
     </div>
   );
-}
+});
+
+export default Block;
